@@ -51,9 +51,9 @@ rustup target add wasm32-unknown-unknown
 # Install node, npm and rollup
 echo "-----> Installing node and rollup"
 cd $BUILD_DIR
-curl https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-x64.tar.xz > $BUILD_DIR/node_tar
+curl https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-x64.tar.xz
 mkdir -p $BUILD_DIR/node
-tar -cJvf $BUILD_DIR/node_tar -C $BUILD_DIR/node
+tar -cJvf node-v12.16.3-linux-x64.tar.xz -C $BUILD_DIR/node
 export PATH=$PATH:$BUILD_DIR/node/node-v12.16.3-linux-x64/bin/
 npm install --global rollup
 
