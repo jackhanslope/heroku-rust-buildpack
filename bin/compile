@@ -58,13 +58,6 @@ rm node.tar.xz
 export PATH=$PATH:$HOME/node/node-v12.16.3-linux-x64/bin/
 npm install --global rollup
 
-# Build backend
-echo "-----> Building backend"
-mkdir -p $BUILD_DIR/target
-cd $BUILD_DIR/backend
-cargo build --release --target-dir $BUILD_DIR/target
-echo "-----> Backend built"
-
 # build frontend
 echo "-----> Building frontend"
 cd $BUILD_DIR
@@ -75,3 +68,10 @@ wasm-pack build --target web  --out-dir ../static/wasm-pack
 cd $BUILD_DIR/static
 echo "-----> rolling up javascript"
 rollup ./main.js --format iife --file ./wasm-pack/bundle.js
+
+# Build backend
+echo "-----> Building backend"
+mkdir -p $BUILD_DIR/target
+cd $BUILD_DIR/backend
+cargo build --release --target-dir $BUILD_DIR/target
+echo "-----> Backend built"
