@@ -39,6 +39,8 @@ chmod u+x rustup.sh
 echo "-----> Using rustup to install Rust channel $VERSION"
 ./rustup.sh -y --default-toolchain "$VERSION"
 rm rustup.sh
+export PATH=$PATH:$HOME/.cargo/bin
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 echo "-----> Installing wasm-pack"
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
