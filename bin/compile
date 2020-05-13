@@ -40,14 +40,25 @@ echo "-----> Using rustup to install Rust channel $VERSION"
 ./rustup.sh -y --default-toolchain "$VERSION"
 rm rustup.sh
 export PATH=$PATH:$HOME/.cargo/bin
-curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 echo "-----> Checking for wasm-pack"
-if hash wasm-pack 2>/dev/null; then
+if ! [ hash wasm-pack 2>/dev/null]; then
         echo "-----> Installing wasm-pack"
         curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 fi
 echo "-----> Adding wasm tartget"
 rustup target add wasm32-unknown-unknown
+
+# Install node, npm and rollup
+echo "-----> Installing node and rollup"
+cd $BUILD_DIR
+curl https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-x64.tar.xz > $BUILD_DIR/node_tar
+mkdir -p $BUILD_DIR/node
+tar -cJvf $BUILD_DIR/node_tar -C $BUILD_DIR/node
+export PATH=$PATH:$BUILD_DIR/node/node-v12.16.3-linux-x64/bin/
+npm install --global rollup
+
+
+
 
 # Build backend
 echo "-----> Building backend"
