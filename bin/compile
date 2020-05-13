@@ -43,14 +43,19 @@ echo "-----> Installing wasm-pack"
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
 # Build backend
+echo "-----> Building backend"
 mkdir -p $BUILD_DIR/target
 cd $BUILD_DIR/backend
 cargo build --target-dir $BUILD_DIR/target
+echo "-----> Backend built"
 
 # build frontend
+echo "-----> Building frontend"
 cd $BUILD_DIR
 mkdir -p static/wasm-pack
 cd $BUILD_DIR/frontend
+echo "-----> Running wasm-pack build"
 wasm-pack build --target web  --out-dir ../static/wasm-pack
 cd $BUILD_DIR/static
+echo "-----> rolling up javascript"
 rollup ./main.js --format iife --file ./wasm-pack/bundle.js
