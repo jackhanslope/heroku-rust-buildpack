@@ -41,14 +41,17 @@ echo "-----> Using rustup to install Rust channel $VERSION"
 rm rustup.sh
 export PATH=$PATH:$HOME/.cargo/bin
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-echo "-----> Installing wasm-pack"
-curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+echo "-----> Checking for wasm-pack"
+if hash wasm-pack 2>/dev/null; then
+        echo "-----> Installing wasm-pack"
+        curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+fi
 
 # Build backend
 echo "-----> Building backend"
 mkdir -p $BUILD_DIR/target
 cd $BUILD_DIR/backend
-cargo build --target-dir $BUILD_DIR/target
+cargo build --release --target-dir $BUILD_DIR/target
 echo "-----> Backend built"
 
 # build frontend
