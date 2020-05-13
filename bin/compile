@@ -46,6 +46,8 @@ if hash wasm-pack 2>/dev/null; then
         echo "-----> Installing wasm-pack"
         curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 fi
+echo "-----> Adding wasm tartget"
+rustup target add wasm32-unknown-unknown
 
 # Build backend
 echo "-----> Building backend"
